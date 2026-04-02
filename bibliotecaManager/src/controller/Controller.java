@@ -29,7 +29,7 @@ public class Controller {
     // READ (per codice)
     public Risorsa cercaPerCodice(String codice) {
         for (Risorsa r : risorse) {
-            if (r.getCodice().equalsIgnoreCase(codice)) { // TODO Aggiungere in Risorsa metodo getCodice()
+            if (r.getCodice().equalsIgnoreCase(codice)) {
                 return r;
             }
         }
@@ -41,8 +41,8 @@ public class Controller {
         Risorsa r = cercaPerCodice(codice);
 
         if (r != null) {
-            r.setTitolo(nuovoTitolo); // TODO Aggiungere in Risorsa metodo setTitolo(String titolo)
-            r.setAnnoPubblicazione(nuovoAnno); // TODO Aggiungere in Risorsa metodo setAnnoPubblicazione(int anno)
+            r.setTitolo(nuovoTitolo);
+            r.setAnnoPubblicazione(nuovoAnno);
 
             conn.aggiornaRisorsa(r); // TODO Aggiungere in DBConn metodo aggiornaRisorsa(Risorsa r), che dovrà aggiornare la risorsa nel database in base al codice
             return true;
