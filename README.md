@@ -1,7 +1,6 @@
 # Biblioteca Digitale — Progetto OOP di Gruppo 3
 
 
-CIAOOOOOO LUCAAAAA 
 ## Descrizione
 Sistema Java per la gestione di una Biblioteca Digitale che permette di catalogare risorse digitali (Libri, Riviste, Ebook), gestire utenti e prestiti, e consultare l'inventario completo.
 
