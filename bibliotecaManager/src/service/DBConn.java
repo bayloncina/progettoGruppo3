@@ -13,7 +13,8 @@ public class DBConn {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
+    private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME
+            + "?createDatabaseIfNotExist=true";
 
     private static Connection connection = null;
 
@@ -49,6 +50,7 @@ public class DBConn {
     }
 
 
+    
     // METODI PER GESTIRE LE RISORSE NEL DB
 
     // CREATE
@@ -60,27 +62,22 @@ public class DBConn {
             ps.setString(1, r.getCodice());
             ps.setString(2, r.getTitolo());
             ps.setInt(3, r.getAnnoPubblicazione());
+            ps.setString(4, r.getClass().getSimpleName());
 
+            // valori specifici per sottoclasse
             if (r instanceof Libro) {
-                ps.setString(4, "Libro");
                 ps.setString(5, ((Libro) r).getAutore());
+                //i valori che non servono vengono settati a null
                 ps.setNull(6, java.sql.Types.INTEGER);
                 ps.setNull(7, java.sql.Types.VARCHAR);
             } else if (r instanceof Rivista) {
-                ps.setString(4, "Rivista");
                 ps.setNull(5, java.sql.Types.VARCHAR);
                 ps.setInt(6, ((Rivista) r).getNumero());
                 ps.setNull(7, java.sql.Types.VARCHAR);
             } else if (r instanceof Ebook) {
-                ps.setString(4, "Ebook");
                 ps.setNull(5, java.sql.Types.VARCHAR);
                 ps.setNull(6, java.sql.Types.INTEGER);
                 ps.setString(7, ((Ebook) r).getFormato());
-            } else {
-                ps.setString(4, "Risorsa");
-                ps.setNull(5, java.sql.Types.VARCHAR);
-                ps.setNull(6, java.sql.Types.INTEGER);
-                ps.setNull(7, java.sql.Types.VARCHAR);
             }
 
             ps.executeUpdate();
@@ -125,7 +122,7 @@ public class DBConn {
     /* Metodo relativamente inutile, messo per completezza
         La ricerca per codice avviene nel controller: Si aggiorna la lista completa → Si cerca in memoria, senza dover fare una query al DB ogni volta
     */
-   // TODO: Capire se è meglio fare una query al DB ogni volta o se conviene cercare in memoria (la prima è più "pulita", la seconda è più efficiente) ← Dennis
+   // TODO Capire se è meglio fare una query al DB ogni volta o se conviene cercare in memoria (la prima è più "pulita", la seconda è più efficiente) ← Dennis
    // Volendo si potrebbero fare entrambe le cose, cercando prima in memoria e, se non si trova, facendo una query al DB (ma è un po' più complesso da implementare)
    // Bisognerebbe creare un metodo che aggiorni ogni volta la lista, non leggendola completamente, ma aggiornando solo le parti mancanti
    // N.B. Ciò credo sia necessario solo se si deve lavorare su diverse macchine contemporaneamente, altrimenti si può considerare che la lista in memoria sia sempre aggiornata (a meno di errori di programmazione)
