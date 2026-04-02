@@ -22,12 +22,13 @@ src/
 │   ├── Rivista.java         → estende Risorsa, attributo: numero
 │   └── Ebook.java           → estende Risorsa, attributo: formato
 ├── service/
-│   └── DBConn.java          → connessione MySQL, creazione db/tabelle, salva/aggiorna/elimina
+│   ├── DBConn.java          → connessione MySQL e metodi CRUD sul db
+│   └── DBSetup.java         → creazione automatica database e tabelle
+├── utility/
 ├── view/
-│   └── (interfaccia utente)
+│   └── View.java            → interfaccia utente
 └── App.java                 → avvio applicazione
 ```
-
 ---
 
 ## Divisione dei Compiti
