@@ -1,22 +1,17 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import controller.Controller;
-import model.Ebook;
-import model.Libro;
-import model.Risorsa;
-import model.Rivista;
+import model.*;
+import utility.Utility;
 
 public class View {
 
     private Controller controller;
-    private Scanner scanner;
 
     public View(Controller controller) {
         this.controller = controller;
-        scanner = new Scanner(System.in);
     }
 
     public void avvia() {
@@ -24,8 +19,7 @@ public class View {
 
         do {
             mostraMenu();
-            scelta = scanner.nextInt();
-            scanner.nextLine(); // pulizia buffer
+            scelta = Utility.askInt();
 
             switch (scelta) {
                 case 1:
@@ -67,45 +61,53 @@ public class View {
 
     // CREATE
     private void aggiungiRisorsa() {
-        System.out.println("\n--- Tipo risorsa ---");
-        System.out.println("1. Libro");
-        System.out.println("2. Rivista");
-        System.out.println("3. Ebook");
+        System.out.println("\n=== GESTIONALE BIBLIOTECA ===");
+        System.out.println("Scegli tipo di risorsa:");
+        System.out.println("1) Libro");
+        System.out.println("2) Rivista");
+        System.out.println("3) Ebook");
+        System.out.println("==============================");
         System.out.print("Scelta: ");
-        int tipo = scanner.nextInt();
-        scanner.nextLine();
-
-        // campi comuni a tutte le risorse
+    
+        int tipo = Utility.askInt();
+    
         System.out.print("Titolo: ");
-        String titolo = scanner.nextLine();
-        System.out.print("Anno pubblicazione: ");
-        int anno = scanner.nextInt();
-        scanner.nextLine();
+        String titolo = Utility.askString();
+    
+        System.out.print("Anno: ");
+        int anno = Utility.askInt();
+    
         System.out.print("Codice: ");
-        String codice = scanner.nextLine();
-
+        String codice = Utility.askString();
+    
+        Risorsa r = null;
+    
         switch (tipo) {
-            case 1 -> {
+            case 1:
                 System.out.print("Autore: ");
-                String autore = scanner.nextLine();
-                controller.aggiungiRisorsa(new Libro(titolo, anno, codice, autore));
-                System.out.println("Libro aggiunto!");
-            }
-            case 2 -> {
+                String autore = Utility.askString();
+                r = new model.Libro(titolo, anno, codice, autore);
+                break;
+    
+            case 2:
                 System.out.print("Numero rivista: ");
-                int numero = scanner.nextInt();
-                scanner.nextLine();
-                controller.aggiungiRisorsa(new Rivista(titolo, anno, codice, numero));
-                System.out.println("Rivista aggiunta!");
-            }
-            case 3 -> {
-                System.out.print("Formato (PDF/EPUB): ");
-                String formato = scanner.nextLine();
-                controller.aggiungiRisorsa(new Ebook(titolo, anno, codice, formato));
-                System.out.println("Ebook aggiunto!");
-            }
-            default -> System.out.println("Tipo non valido.");
+                int numero = Utility.askInt();
+                r = new model.Rivista(titolo, anno, codice, numero);
+                break;
+    
+            case 3:
+                System.out.print("Formato (es. PDF): ");
+                String formato = Utility.askString();
+                r = new model.Ebook(titolo, anno, codice, formato);
+                break;
+    
+            default:
+                System.out.println("Tipo non valido!");
+                return;
         }
+    
+        controller.aggiungiRisorsa(r);
+        System.out.println("Risorsa aggiunta con successo!");
     }
 
     // READ
@@ -119,14 +121,14 @@ public class View {
 
         for (Risorsa r : lista) {
             r.visualizzaDettagli();
-            System.out.println("------------------");
+            System.out.println("===================");
         }
     }
 
     // READ singola
     private void cercaRisorsa() {
         System.out.print("Inserisci codice: ");
-        String codice = scanner.nextLine();
+        String codice = Utility.askString();
 
         Risorsa r = controller.cercaPerCodice(codice);
 
@@ -140,14 +142,13 @@ public class View {
     // UPDATE
     private void aggiornaRisorsa() {
         System.out.print("Codice risorsa da aggiornare: ");
-        String codice = scanner.nextLine();
+        String codice = Utility.askString();
 
         System.out.print("Nuovo titolo: ");
-        String titolo = scanner.nextLine();
+        String titolo = Utility.askString();
 
         System.out.print("Nuovo anno: ");
-        int anno = scanner.nextInt();
-        scanner.nextLine();
+        int anno = Utility.askInt();
 
         boolean aggiornato = controller.aggiornaRisorsa(codice, titolo, anno);
 
@@ -161,7 +162,7 @@ public class View {
     // DELETE
     private void eliminaRisorsa() {
         System.out.print("Codice risorsa da eliminare: ");
-        String codice = scanner.nextLine();
+        String codice = Utility.askString();
 
         boolean eliminato = controller.eliminaRisorsa(codice);
 
