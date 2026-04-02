@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.Controller;
+import model.Ebook;
+import model.Libro;
 import model.Risorsa;
+import model.Rivista;
 
 public class View {
-    
 
     private Controller controller;
     private Scanner scanner;
@@ -65,7 +67,45 @@ public class View {
 
     // CREATE
     private void aggiungiRisorsa() {
-        // TODO: Implementare la logica per aggiungere una nuova risorsa (libro, rivista, DVD) chiedendo all'utente i dettagli necessari e poi chiamando controller.aggiungiRisorsa(new Risorsa(...))
+        System.out.println("\n--- Tipo risorsa ---");
+        System.out.println("1. Libro");
+        System.out.println("2. Rivista");
+        System.out.println("3. Ebook");
+        System.out.print("Scelta: ");
+        int tipo = scanner.nextInt();
+        scanner.nextLine();
+
+        // campi comuni a tutte le risorse
+        System.out.print("Titolo: ");
+        String titolo = scanner.nextLine();
+        System.out.print("Anno pubblicazione: ");
+        int anno = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Codice: ");
+        String codice = scanner.nextLine();
+
+        switch (tipo) {
+            case 1 -> {
+                System.out.print("Autore: ");
+                String autore = scanner.nextLine();
+                controller.aggiungiRisorsa(new Libro(titolo, anno, codice, autore));
+                System.out.println("Libro aggiunto!");
+            }
+            case 2 -> {
+                System.out.print("Numero rivista: ");
+                int numero = scanner.nextInt();
+                scanner.nextLine();
+                controller.aggiungiRisorsa(new Rivista(titolo, anno, codice, numero));
+                System.out.println("Rivista aggiunta!");
+            }
+            case 3 -> {
+                System.out.print("Formato (PDF/EPUB): ");
+                String formato = scanner.nextLine();
+                controller.aggiungiRisorsa(new Ebook(titolo, anno, codice, formato));
+                System.out.println("Ebook aggiunto!");
+            }
+            default -> System.out.println("Tipo non valido.");
+        }
     }
 
     // READ
