@@ -3,7 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import controller.Controller;
-import model.Risorsa;
+import model.*;
 import utility.Utility;
 
 public class View {
