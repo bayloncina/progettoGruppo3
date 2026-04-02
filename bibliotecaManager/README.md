@@ -1,7 +1,6 @@
 # Biblioteca Digitale — Progetto OOP di Gruppo 3
 
 
-CIAOOOOOO LUCAAAAA 
 ## Descrizione
 Sistema Java per la gestione di una Biblioteca Digitale che permette di catalogare risorse digitali (Libri, Riviste, Ebook), gestire utenti e prestiti, e consultare l'inventario completo.
 
@@ -15,19 +14,33 @@ Il progetto dimostra le tre regole fondamentali dell'OOP:
 
 ## Struttura del Progetto
 ```
-DA DEFINIRE
+src/
+├── controller/
+│   └── Controller.java      → logica di controllo
+├── model/
+│   ├── Risorsa.java         → classe base
+│   ├── Libro.java           → estende Risorsa
+│   ├── Rivista.java         → estende Risorsa
+│   └── Ebook.java           → estende Risorsa
+├── service/
+│   └── DBConn.java          → connessione database
+├── view/
+│   └── (da definire)
+└── App.java                 → avvio applicazione
 ```
+
 
 ---
 
 ## Divisione dei Compiti
 
+## Divisione dei Compiti
+
 | Membro | Area di Responsabilità |
 |--------|----------------------|
-| **Luca** | `DatabaseManager.java` — connessione MySQL, salvataggio e lettura dati |
-| **Dennis** | da definire |
-| **Miriam** | da definire |
-
+| **Luca** | `service/DBConn.java` — connessione MySQL e gestione database |
+| **Miriam** | `model/` — `Risorsa`, `Libro`, `Rivista`, `Ebook` — classi base e ereditarietà |
+| **Dennis** | `controller/` + `view/` — logica di controllo e interfaccia utente |
 ---
 
 ## Requisiti Tecnici
