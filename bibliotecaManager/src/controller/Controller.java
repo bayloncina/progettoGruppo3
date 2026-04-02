@@ -44,7 +44,7 @@ public class Controller {
             r.setTitolo(nuovoTitolo);
             r.setAnnoPubblicazione(nuovoAnno);
 
-            conn.aggiornaRisorsa(r); // TODO Aggiungere in DBConn metodo aggiornaRisorsa(Risorsa r), che dovrà aggiornare la risorsa nel database in base al codice
+            conn.salvaRisorsa(r); // TODO Aggiungere in DBConn metodo aggiornaRisorsa(Risorsa r), che dovrà aggiornare la risorsa nel database in base al codice
             return true;
         }
         return false;
@@ -56,7 +56,7 @@ public class Controller {
 
         if (r != null) {
             risorse.remove(r);
-            conn.eliminaRisorsa(codice); // TODO Aggiungere in DBConn metodo eliminaRisorsa(String codice), che dovrà eliminare la risorsa dal database in base al codice
+            conn.salvaRisorsa(codice); // TODO Aggiungere in DBConn metodo eliminaRisorsa(String codice), che dovrà eliminare la risorsa dal database in base al codice
             return true;
         }
         return false;

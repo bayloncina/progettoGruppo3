@@ -1,10 +1,12 @@
+package service;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBSetup {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Connection conn = DBConn.getConnection();
 
         try (Statement stmt = conn.createStatement()) {
