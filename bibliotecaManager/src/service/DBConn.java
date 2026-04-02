@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.Risorsa;
@@ -46,9 +47,45 @@ public class DBConn {
             }
         }
     }
-
+//TODO Inserire gli altri attrubuti per libro, ebook e rivista
     public void salvaRisorsa(Risorsa r) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'salvaRisorsa'");
+        String sql = "INSERT INTO risorse (codice, titolo, anno_pubblicazione) VALUES (?, ?, ?)";
+
+        try (Connection conn = DBConn.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, r.getCodice());
+            ps.setString(2, r.getTitolo());
+            ps.setInt(3, r.getAnnoPubblicazione());
+
+            int righeInserite = ps.executeUpdate();
+
+            if (righeInserite > 0) {
+                System.out.println("[DBConn] Risorsa '" + r.getCodice() + "' salvata con successo.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[DBConn] Errore durante il salvataggio della risorsa: " + e.getMessage());
+        }
     }
+
+    public void salvaRisorsa(String codice) {
+        String sql = "INSERT INTO risorse (codice) VALUES (?)";
+
+        try (Connection conn = DBConn.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, codice);
+
+            int righeInserite = ps.executeUpdate();
+
+            if (righeInserite > 0) {
+                System.out.println("[DBConn] Risorsa con codice '" + codice + "' salvata con successo.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[DBConn] Errore durante il salvataggio: " + e.getMessage());
+        }
+    }
+
 }
