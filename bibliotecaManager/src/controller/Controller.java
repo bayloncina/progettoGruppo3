@@ -11,8 +11,8 @@ public class Controller {
     private DBConn conn;
 
     public Controller() {
-        risorse = new ArrayList<>();
         conn = new DBConn();
+        risorse = conn.caricaRisorse(); // carica dal DB all'avvio
     }
 
     // CREATE
