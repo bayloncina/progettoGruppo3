@@ -23,9 +23,9 @@ public class Libro extends Risorsa {
     @Override
     public void visualizzaDettagli() {
         System.out.println("Libro | Titolo: " + getTitolo() +
-                           " | Anno: " + getAnnoPubblicazione() +
-                           " | Codice: " + getCodice() +
-                           " | Autore: " + autore);
+                " | Anno: " + getAnnoPubblicazione() +
+                " | Codice: " + getCodice() +
+                " | Autore: " + autore);
     }
 
 }

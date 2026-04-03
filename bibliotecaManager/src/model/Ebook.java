@@ -8,7 +8,10 @@ public class Ebook extends Risorsa {
         this.formato = formato;
     }
 
-    public String getFormato() { return formato; }
+    public String getFormato() {
+        return formato;
+    }
+
     public void setFormato(String formato) {
         if (formato == null || formato.isEmpty()) {
             System.out.println("Formato non valido.");
@@ -20,9 +23,9 @@ public class Ebook extends Risorsa {
     @Override
     public void visualizzaDettagli() {
         System.out.println("Ebook | Titolo: " + getTitolo() +
-                           " | Anno: " + getAnnoPubblicazione() +
-                           " | Codice: " + getCodice() +
-                           " | Formato: " + formato);
+                " | Anno: " + getAnnoPubblicazione() +
+                " | Codice: " + getCodice() +
+                " | Formato: " + formato);
     }
 
 }

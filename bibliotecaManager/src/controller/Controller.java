@@ -13,19 +13,21 @@ public class Controller {
     private DBConn conn;
 
     public Controller() {
-        risorse = conn.ottieniTutteRisorse();
-        conn = new DBConn();
-        utenti = new ArrayList<>(); 
-        prestiti = new ArrayList<>();
-    }
+    conn = new DBConn();                    // prima inizializza conn
+    risorse = conn.ottieniTutteRisorse();   // poi usa conn
+    utenti = new ArrayList<>();
+    prestiti = new ArrayList<>();
+}
 
     // METODI PER GESTIRE LE RISORSE
 
     // CREATE
     public void aggiungiRisorsa(Risorsa r) {
-        risorse.add(r);
         conn.salvaRisorsa(r);
+         risorse.add(r);
     }
+       
+        
 
     // READ (tutte)
     public ArrayList<Risorsa> getRisorse() {

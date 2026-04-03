@@ -8,7 +8,10 @@ public class Rivista extends Risorsa {
         this.numero = numero;
     }
 
-    public int getNumero() { return numero; }
+    public int getNumero() {
+        return numero;
+    }
+
     public void setNumero(int numero) {
         if (numero <= 0) {
             System.out.println("Numero rivista non valido.");
@@ -20,10 +23,9 @@ public class Rivista extends Risorsa {
     @Override
     public void visualizzaDettagli() {
         System.out.println("Rivista | Titolo: " + getTitolo() +
-                           " | Anno: " + getAnnoPubblicazione() +
-                           " | Codice: " + getCodice() +
-                           " | Numero: " + numero);
+                " | Anno: " + getAnnoPubblicazione() +
+                " | Codice: " + getCodice() +
+                " | Numero: " + numero);
     }
 
-    
 }
