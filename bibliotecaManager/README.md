@@ -41,7 +41,7 @@ src/
 | Membro | Area di Responsabilità |
 |--------|----------------------|
 | **Luca** | `service/` — connessione MySQL, creazione database e tabelle, metodi CRUD sul db |
-| **Miriam** | `model/` — `Risorsa` (astratta), `Libro`, `Rivista`, `Ebook`, `Utente`, `Biblioteca` — incapsulamento ed ereditarietà |
+| **Maria** | `model/` — `Risorsa` (astratta), `Libro`, `Rivista`, `Ebook`, `Utente`, `Biblioteca` — incapsulamento ed ereditarietà |
 | **Dennis** | `controller/` + `view/` — logica CRUD, gestione prestiti e interfaccia utente |
 
 ---
